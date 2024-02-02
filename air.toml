@@ -1,0 +1,7 @@
+# air.toml
+root = "."  # корневая директория вашего проекта
+
+[[monitor]]
+  paths = ["."]
+
+  goargs = ["-mod=mod"]  # флаги для go run
