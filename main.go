@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"math/rand"
 	"regexp"
@@ -34,12 +35,17 @@ func generateProxyList(rangeProxy string) []string {
 	for port := minPort; port < maxPort; port++ {
 		proxyList = append(proxyList, fmt.Sprint(ip, port))
 	}
-	
+
 	return proxyList
 }
 
 func main() {
-	proxies := generateProxyList("0.0.0.0:{1000-2000}")
+	ip := flag.String("ip", "0.0.0.0", "a string")
+	portRange := flag.String("port-range", "{1111-9999}", "a string")
+
+	flag.Parse()
+
+	proxies := generateProxyList(fmt.Sprintf("%s:%s", *ip, *portRange))
 
 	fmt.Println(getRandomProxy(proxies))
 }
